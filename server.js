@@ -6,8 +6,6 @@ import adminRoutes from "./routes/adminRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import faqRoutes from "./routes/faqRoutes.js";
 import conversationRoutes from "./routes/conversationRoutes.js";
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
 
 
 
@@ -16,7 +14,12 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api/admin", adminRoutes);
